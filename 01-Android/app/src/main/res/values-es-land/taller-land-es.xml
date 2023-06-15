@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bienvenida">Bienvenida LAND ES</string>
+    <color name="color_letra">#660F6F</color>
+    <color name="color_fondo">#E0ADF8</color>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bienvenida">Bienvenida PORT ES</string>
+    <color name="color_letra">#940A04</color>
+    <color name="color_fondo">#F49793</color>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "29176918213",
+    "project_id": "a-mov-com-ercs",
+    "storage_bucket": "a-mov-com-ercs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29176918213:android:8f1190c2e5603c6127c0ac",
+        "android_client_info": {
+          "package_name": "com.example.movilescomp2023a"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29176918213-l1nmquef3a1b9s7jih85cqqn2sp7ld93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSKEaa6szlDl28bK84IvBAlbI9mtharhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29176918213-l1nmquef3a1b9s7jih85cqqn2sp7ld93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
