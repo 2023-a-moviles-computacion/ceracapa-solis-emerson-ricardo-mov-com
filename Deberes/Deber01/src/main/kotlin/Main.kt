@@ -27,8 +27,18 @@ class PanaderiaManager {
         }
     }
 
+    fun existsPanaderia(id: Int): Boolean {
+        val panaderias = readAll()
+        return panaderias.any { it.id == id }
+    }
+
     fun create(panaderia: Panaderia) {
+        if (existsPanaderia(panaderia.id)) {
+            println("ERROR!!!! El ID de la panadería ya está en uso.")
+            return
+        }
         file.appendText("${panaderia.id},${panaderia.nombre},${panaderia.ubicacion},${panaderia.esCafeteria},${panaderia.arriendo}\n")
+        println("Panadería creada correctamente.")
     }
 
     fun readAll(): List<Panaderia> {
@@ -78,8 +88,28 @@ class PanManager {
         }
     }
 
-    fun create(pan: Pan) {
+    fun existsPan(id: Int): Boolean {
+        val panes = readAll()
+        return panes.any { it.id == id }
+    }
+
+    fun existsPanaderia(id: Int, panaderiaManager: PanaderiaManager): Boolean {
+        val panaderias = panaderiaManager.readAll()
+        return panaderias.any { it.id == id }
+    }
+
+    fun create(pan: Pan, panaderiaManager: PanaderiaManager) {
+        val panaderiaExists = existsPanaderia(pan.idPanaderia, panaderiaManager)
+        if (!panaderiaExists) {
+            println("ERROR!!!! La panadería con el ID ${pan.idPanaderia} no existe.")
+            return
+        }
+        if (existsPan(pan.id)) {
+            println("ERROR!!!! El ID del pan ya está en uso.")
+            return
+        }
         file.appendText("${pan.id},${pan.idPanaderia},${pan.nombre},${pan.origen},${pan.esDulce},${pan.precio},${pan.stock}\n")
+        println("Pan creado correctamente.")
     }
 
     fun readAll(): List<Pan> {
@@ -153,6 +183,7 @@ fun main() {
 
         when (readLine()?.toIntOrNull()) {
             1 -> {
+                println("==================================")
                 println("Ingrese los datos de la panadería:")
                 print("[ID]: ")
                 val id = readLine()?.toIntOrNull() ?: continue
@@ -167,9 +198,10 @@ fun main() {
 
                 val panaderia = Panaderia(id, nombre, ubicacion, esCafeteria, arriendo)
                 panaderiaManager.create(panaderia)
-                println("Panadería creada correctamente.")
+
             }
             2 -> {
+                println("==================================")
                 val panaderias = panaderiaManager.readAll()
                 if (panaderias.isNotEmpty()) {
                     println("Lista de panaderías:")
@@ -187,7 +219,8 @@ fun main() {
                 }
             }
             3 -> {
-                println("Ingrese el ID de la panadería que desea actualizar:")
+                println("==================================")
+                print("Ingrese el ID de la panadería que desea actualizar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 val panaderias = panaderiaManager.readAll()
                 val panaderia = panaderias.find { it.id == id }
@@ -210,12 +243,14 @@ fun main() {
                 }
             }
             4 -> {
-                println("Ingrese el ID de la panadería que desea eliminar:")
+                println("==================================")
+                print("Ingrese el ID de la panadería que desea eliminar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 panaderiaManager.delete(id)
                 println("Panadería eliminada correctamente.")
             }
             5 -> {
+                println("==================================")
                 println("Ingrese los datos del pan:")
                 print("[ID]: ")
                 val id = readLine()?.toIntOrNull() ?: continue
@@ -233,10 +268,11 @@ fun main() {
                 val stock = readLine()?.toIntOrNull() ?: continue
 
                 val pan = Pan(id, idPanaderia, nombre, origen, esDulce, precio, stock)
-                panManager.create(pan)
-                println("Pan creado correctamente.")
+                panManager.create(pan, panaderiaManager)
+
             }
             6 -> {
+                println("==================================")
                 val panes = panManager.readAll()
                 if (panes.isNotEmpty()) {
                     println("Lista de panes:")
@@ -256,7 +292,8 @@ fun main() {
                 }
             }
             7 -> {
-                println("Ingrese el ID del pan que desea actualizar:")
+                println("==================================")
+                print("Ingrese el ID del pan que desea actualizar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 val panes = panManager.readAll()
                 val pan = panes.find { it.id == id }
@@ -283,16 +320,19 @@ fun main() {
                 }
             }
             8 -> {
-                println("Ingrese el ID del pan que desea eliminar:")
+                println("==================================")
+                print("Ingrese el ID del pan que desea eliminar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 panManager.delete(id)
                 println("Pan eliminado correctamente.")
             }
             9 -> {
+                println("==================================")
                 println("Saliendo del programa...")
                 return
             }
             else -> {
+                println("==================================")
                 println("Opción no válida.")
             }
         }

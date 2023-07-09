@@ -1,1 +1,1 @@
-1,Hola Mundo,X D,false,250.23
+2,Rosa Blanca,Quito,true,450.25
