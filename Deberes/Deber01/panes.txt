@@ -1,2 +1,2 @@
 5,1,Pan Dulce,Ecuador,true,0.15,20
-6,2,Pan de chocolate,Americano,true,0.5,25
+6,2,Pan XD,Mexicano,true,0.75,15
