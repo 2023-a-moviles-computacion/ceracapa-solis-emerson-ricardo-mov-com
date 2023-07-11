@@ -17,22 +17,21 @@
             android:name=".FRecyclerView"
             android:exported="false" />
         <activity
-            android:name=".ECrudEntrenador"
-            android:exported="false" />
-        <activity
             android:name=".CIntentExplicitoParametros"
-            android:exported="false" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
 
-        <intent-filter>
-            <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-
-            <data android:mimeType="text/plain" />
-        </intent-filter>
-
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BListView"
+            android:exported="false" />
+        <activity
+            android:name=".ECrudEntrenador"
             android:exported="false" />
         <activity
             android:name=".AACicloVida"
