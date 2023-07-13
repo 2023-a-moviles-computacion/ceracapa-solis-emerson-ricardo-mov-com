@@ -93,8 +93,8 @@ class HomePanaderias :  AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mi_editar -> {
-                /*Log.i("context-menu", "Edit position: ${idSelectItem}")
-                abrirActividadConParametros(EditarEquipo::class.java)*/
+                Log.i("context-menu", "Edit position: ${idSelectItem}")
+                abrirActividadConParametros(EditarPanaderia::class.java)
                 return true
             }
             R.id.mi_eliminar -> {
