@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="376dp"
-        android:layout_height="47dp"
+        android:layout_height="74dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,13 +18,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtIn_anioFundacionPanaderia_crear"
             android:layout_width="344dp"
-            android:layout_height="35dp" />
+            android:layout_height="60dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
-        android:layout_width="376dp"
-        android:layout_height="47dp"
+        android:layout_width="378dp"
+        android:layout_height="69dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,21 +33,21 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtIn_arriendoPanaderia_crear"
             android:layout_width="341dp"
-            android:layout_height="35dp" />
+            android:layout_height="60dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
-        android:layout_width="376dp"
-        android:layout_height="47dp"
+        android:layout_width="378dp"
+        android:layout_height="70dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtIn_ubicacionPanaderia_crear"
-            android:layout_width="334dp"
-            android:layout_height="35dp" />
+            android:layout_width="333dp"
+            android:layout_height="60dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -119,7 +119,7 @@
         android:id="@+id/btn_crearPanaderia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#279746"
         android:text="CREAR"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,19 +130,20 @@
         android:id="@+id/btn_cancelar_crear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#E41919"
         android:text="CANCELAR"
         android:textColorHighlight="#BC1818"
         android:textColorLink="#DF0D0D"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_crearPanaderia" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
-        android:layout_width="372dp"
-        android:layout_height="48dp"
+        android:layout_width="374dp"
+        android:layout_height="68dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
@@ -150,10 +151,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtIn_nombrePanaderia_crear"
             android:layout_width="334dp"
-            android:layout_height="35dp"
+            android:layout_height="60dp"
             android:foregroundTint="#000000"
-            android:textAlignment="textStart"
+            android:textAllCaps="false"
             android:textColor="#000000"
+            android:textColorHighlight="#FF9292"
+            android:textColorHint="#000000"
+            android:textColorLink="#FFB1B1"
             android:textSize="12sp"
             android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -161,7 +165,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="376dp"
-        android:layout_height="47dp"
+        android:layout_height="71dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
@@ -169,7 +173,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtIn_esCafeteriaPanaderia_crear"
             android:layout_width="335dp"
-            android:layout_height="35dp" />
+            android:layout_height="60dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
