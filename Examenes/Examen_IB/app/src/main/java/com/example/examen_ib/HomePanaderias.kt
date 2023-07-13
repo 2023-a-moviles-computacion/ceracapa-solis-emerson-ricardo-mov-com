@@ -98,21 +98,19 @@ class HomePanaderias :  AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminar -> {
-                /*Log.i("context-menu", "Delete position: ${idSelectItem}")
-                EquipoBaseDeDatos.TablaEquipo!!.eliminarEquipos(idSelectItem)
-                val listViewEquipo = findViewById<ListView>(R.id.lv_equipos_lista)
+                Log.i("context-menu", "Delete position: ${idSelectItem}")
+                PanaderiaBDD.TablaPanaderia!!.eliminarPanaderia(idSelectItem)
+                val listViewPanaderia = findViewById<ListView>(R.id.lv_panaderias_lista)
                 val adaptador = ArrayAdapter(
                     this,
                     android.R.layout.simple_list_item_1,
-                    EquipoBaseDeDatos.TablaEquipo!!.listarEquipos()
+                    PanaderiaBDD.TablaPanaderia!!.listarPanaderias()
                 )
-                listViewEquipo.adapter = adaptador
-                adaptador.notifyDataSetChanged()*/
+                listViewPanaderia.adapter = adaptador
+                adaptador.notifyDataSetChanged()
                 return true
             }
             R.id.mi_panes -> {
-                /*Log.i("context-menu", "Jugadores: ${idSelectItem}")
-                abrirActividadConParametros(InicioJugadores::class.java)*/
                 return true
             }
             else -> super.onContextItemSelected(item)
