@@ -22,6 +22,12 @@
             android:name=".HomePanaderias"
             android:exported="true" />
         <activity
+            android:name=".HomePanes"
+            android:exported="true" />
+        <activity
+            android:name=".CrearPan"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

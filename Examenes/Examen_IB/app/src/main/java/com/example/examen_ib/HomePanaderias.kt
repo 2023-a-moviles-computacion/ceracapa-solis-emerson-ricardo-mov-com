@@ -111,6 +111,8 @@ class HomePanaderias :  AppCompatActivity() {
                 return true
             }
             R.id.mi_panes -> {
+                /*Log.i("context-menu", "Jugadores: ${idSelectItem}")
+                abrirActividadConParametros(InicioJugadores::class.java)*/
                 return true
             }
             else -> super.onContextItemSelected(item)
