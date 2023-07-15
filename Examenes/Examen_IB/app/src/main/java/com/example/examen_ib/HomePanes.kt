@@ -153,7 +153,7 @@ class HomePanes : AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminarPan -> {
-                /*Log.i("context-menu", "Delete position: ${idSelectItem}")
+                Log.i("context-menu", "Delete position: ${idSelectItem}")
                 PanaderiaBDD.TablaPanaderia!!.eliminarPan(idSelectItem)
 
                 val listVPan = findViewById<ListView>(R.id.lv_panes_lista)
@@ -164,7 +164,7 @@ class HomePanes : AppCompatActivity() {
                     listViewPanes()
                 )
                 listVPan.adapter = adaptador
-                adaptador.notifyDataSetChanged()*/
+                adaptador.notifyDataSetChanged()
                 return true
             }
             else -> super.onContextItemSelected(item)
