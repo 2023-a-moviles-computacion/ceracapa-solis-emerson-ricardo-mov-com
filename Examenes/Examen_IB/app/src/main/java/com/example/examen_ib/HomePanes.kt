@@ -148,8 +148,8 @@ class HomePanes : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mi_editarPan -> {
-                /*Log.i("context-menu", "Edit position: ${idSelectItem}")
-                abrirActividadEditPan(EditarPan::class.java)*/
+                Log.i("context-menu", "Edit position: ${idSelectItem}")
+                abrirActividadEditPan(EditarPan::class.java)
                 return true
             }
             R.id.mi_eliminarPan -> {
