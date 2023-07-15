@@ -28,6 +28,9 @@
             android:name=".CrearPan"
             android:exported="true" />
         <activity
+            android:name=".EditarPan"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

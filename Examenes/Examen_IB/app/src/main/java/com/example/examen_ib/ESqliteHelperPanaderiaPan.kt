@@ -144,7 +144,7 @@ class ESqliteHelperPanaderiaPan(
         var lista = arrayListOf<Pan>()
         var pan404: Pan?
         val baseDatosLectura = readableDatabase
-        val scriptConsultarUsuario = "SELECT * FROM JUGADOR"
+        val scriptConsultarUsuario = "SELECT * FROM PAN"
         val resultadoConsultaLectura = baseDatosLectura.rawQuery(
             scriptConsultarUsuario,
             null
@@ -153,11 +153,11 @@ class ESqliteHelperPanaderiaPan(
             do {
                 pan404= Pan(0,"","","",0.0,0)
                 pan404!!.idPan= resultadoConsultaLectura.getInt(0)
-                pan404.nombre= resultadoConsultaLectura.getString(1)
-                pan404.origen = resultadoConsultaLectura.getString(2)
+                pan404.nombrePan= resultadoConsultaLectura.getString(1)
+                pan404.origenPan = resultadoConsultaLectura.getString(2)
                 pan404.esDulce = resultadoConsultaLectura.getString(3)
-                pan404.precio = resultadoConsultaLectura.getString(4).toDouble()
-                pan404.stock = resultadoConsultaLectura.getString(5).toInt()
+                pan404.precioPan = resultadoConsultaLectura.getString(4).toDouble()
+                pan404.stockPan = resultadoConsultaLectura.getString(5).toInt()
                 lista.add(pan404)
             }while (resultadoConsultaLectura.moveToNext())
         }

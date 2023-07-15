@@ -5,11 +5,11 @@ import android.os.Parcelable
 
 class Pan(
     var  idPan: Int,
-    var nombre: String?,
-    var origen: String?,
+    var nombrePan: String?,
+    var origenPan: String?,
     var esDulce: String?,
-    var precio: Double?,
-    var stock: Int?
+    var precioPan: Double?,
+    var stockPan: Int?
 
 ) : Parcelable{
     constructor(parcel: Parcel) : this(
@@ -24,11 +24,11 @@ class Pan(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(idPan)
-        parcel.writeString(nombre)
-        parcel.writeString(origen)
+        parcel.writeString(nombrePan)
+        parcel.writeString(origenPan)
         parcel.writeString(esDulce)
-        parcel.writeDouble(precio!!)
-        parcel.writeInt(stock!!)
+        parcel.writeDouble(precioPan!!)
+        parcel.writeInt(stockPan!!)
     }
 
     override fun describeContents(): Int {
@@ -36,7 +36,7 @@ class Pan(
     }
 
     override fun toString(): String {
-        return "${nombre}"
+        return "${nombrePan}"
     }
 
     companion object CREATOR : Parcelable.Creator<Pan> {
