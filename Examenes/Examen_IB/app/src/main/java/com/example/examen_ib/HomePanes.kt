@@ -29,6 +29,7 @@ class HomePanes : AppCompatActivity() {
             if(result.data != null){
                 val data = result.data
                 panaderiaPos = data?.getIntExtra("posicionPanaderia",0)!!
+                actualizarListaPanes()
             }
         }
     }
@@ -60,8 +61,7 @@ class HomePanes : AppCompatActivity() {
             }
         }
         var panList = arrayListOf<Pan>()
-        PanaderiaBDD.TablaPanaderia!!.listarPanes()
-            .forEachIndexed { index : Int, pan: Pan ->
+        PanaderiaBDD.TablaPanaderia!!.listarPanes().forEachIndexed { index : Int, pan: Pan ->
                 for(i in listaIDPanes){
                     if(i==pan.idPan){
                         panList.add(pan)
@@ -70,6 +70,17 @@ class HomePanes : AppCompatActivity() {
             }
 
         return panList
+    }
+
+    private fun actualizarListaPanes() {
+        val listViewPan = findViewById<ListView>(R.id.lv_panes_lista)
+        val adaptador = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            listViewPanes()
+        )
+        listViewPan.adapter = adaptador
+        adaptador.notifyDataSetChanged()
     }
 
 
@@ -155,16 +166,7 @@ class HomePanes : AppCompatActivity() {
             R.id.mi_eliminarPan -> {
                 Log.i("context-menu", "Delete position: ${idSelectItem}")
                 PanaderiaBDD.TablaPanaderia!!.eliminarPan(idSelectItem)
-
-                val listVPan = findViewById<ListView>(R.id.lv_panes_lista)
-
-                val adaptador = ArrayAdapter(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    listViewPanes()
-                )
-                listVPan.adapter = adaptador
-                adaptador.notifyDataSetChanged()
+                actualizarListaPanes()
                 return true
             }
             else -> super.onContextItemSelected(item)
