@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
         val botonListView = findViewById<Button>(R.id.btn_ir_list_view)
 
-            botonListView.setOnClickListener {
+        botonListView.setOnClickListener {
                 irActividad(BListView::class.java)
             }
         val botonIntentImplicito = findViewById<Button>(R.id.btn_ir_intent_implicito)
@@ -95,6 +95,12 @@ class MainActivity : AppCompatActivity() {
         botonRView
             .setOnClickListener {
                 irActividad(FRecyclerView::class.java)
+            }
+
+        val botonGoogleMaps = findViewById<Button>(R.id.btn_google_maps)
+        botonGoogleMaps
+            .setOnClickListener {
+                irActividad(GGoogleMapsActivity::class.java)
             }
     }
     fun abrirActividadConParametros(
