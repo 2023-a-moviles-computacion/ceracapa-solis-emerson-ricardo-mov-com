@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,6 +25,19 @@ class GGoogleMapsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ggoogle_maps)
         solicitarPermisos()
         iniciarLogicaMapa()
+
+        val boton = findViewById<Button>(R.id.btn_ir_carolina)
+        boton.
+        setOnClickListener {
+            irCarolina()
+        }
+    }
+
+    fun irCarolina(){
+        val carolina = LatLng(-0.1825684318486696,
+            -78.48447277600916)
+        val zoom = 17f
+        moverCamaraConZoom(carolina, zoom)
     }
 
     fun solicitarPermisos(){
