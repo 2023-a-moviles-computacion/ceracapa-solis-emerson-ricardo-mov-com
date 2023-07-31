@@ -3,6 +3,7 @@ package com.example.movilescomputacion2023a
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -59,7 +60,33 @@ class GGoogleMapsActivity : AppCompatActivity() {
                 moverQuicentro()
                 anadirPolilinea()
                 anadirPoligono()
+                escucharListeners()
             }
+        }
+    }
+
+    fun escucharListeners(){
+        mapa.setOnPolygonClickListener {
+            Log.i("mapa", "setOnPolygonClickListener ${it}")
+            it.tag // ID
+        }
+        mapa.setOnPolylineClickListener {
+            Log.i("mapa", "setOnPolylineClickListener ${it}")
+            it.tag // ID
+        }
+        mapa.setOnMarkerClickListener {
+            Log.i("mapa", "setOnMarkerClickListener ${it}")
+            it.tag // ID
+            return@setOnMarkerClickListener true
+        }
+        mapa.setOnCameraMoveListener {
+            Log.i("mapa", "setOnCameraMoveListener")
+        }
+        mapa.setOnCameraMoveStartedListener {
+            Log.i("mapa", "setOnCameraMoveStartedListener ${it}")
+        }
+        mapa.setOnCameraIdleListener {
+            Log.i("mapa", "setOnCameraIdleListener")
         }
     }
 
