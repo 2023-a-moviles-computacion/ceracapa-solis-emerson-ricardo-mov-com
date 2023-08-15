@@ -6,4 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".IFirestore">
 
+    <ListView
+        android:id="@+id/lv_firestore"
+        android:layout_width="288dp"
+        android:layout_height="391dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_odoc"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_datos_prueba"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_order_by"
+        app:layout_constraintVertical_bias="0.838" />
+
+    <Button
+        android:id="@+id/btn_fs_order_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Order By"
+        app:layout_constraintEnd_toStartOf="@+id/btn_fs_odoc"
+        app:layout_constraintStart_toEndOf="@+id/btn_fs_datos_prueba"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_fs_datos_prueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="C. Datos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_fs_odoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:text="O. Doc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_fs_ind_comp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="IN. Comp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_datos_prueba"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_datos_prueba"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_datos_prueba" />
+
+    <Button
+        android:id="@+id/btn_fs_crear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="CREAR"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_order_by"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_order_by"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_order_by" />
+
+    <Button
+        android:id="@+id/btn_fs_eliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Eliminar"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_odoc"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_odoc"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_odoc" />
+
+    <Button
+        android:id="@+id/btn_fs_epaginar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="E. Paginar"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_ind_comp"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_ind_comp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_ind_comp" />
+
+    <Button
+        android:id="@+id/btn_fs_paginar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="PAGINAR"
+        app:layout_constraintEnd_toEndOf="@+id/btn_fs_crear"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="@+id/btn_fs_crear"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fs_crear" />
 </androidx.constraintlayout.widget.ConstraintLayout>
