@@ -31,8 +31,8 @@ class PanaderiaManager {
     }
 
     private fun createPanaderiaTable() {
-        dataSource.connection.use { connection ->
-            val statement = connection.createStatement()
+            dataSource.connection.use { connection ->
+                val statement = connection.createStatement()
             val createTableSQL = """
                 CREATE TABLE IF NOT EXISTS panaderias (
                     id INTEGER PRIMARY KEY,
@@ -137,7 +137,7 @@ class PanManager {
 
     init {
         dataSource = SQLiteDataSource()
-        dataSource.url = "jdbc:sqlite:panes.db"
+        dataSource.url = "jdbc:sqlite:panaderias.db"
         createPanTable()
     }
 
@@ -345,7 +345,6 @@ fun main() {
 
                     val updatedPanaderia = Panaderia(id, nombre, ubicacion, esCafeteria, arriendo)
                     panaderiaManager.update(updatedPanaderia)
-                    println("Panadería actualizada correctamente.")
                 } else {
                     println("No se encontró una panadería con el ID especificado.")
                 }
@@ -355,7 +354,6 @@ fun main() {
                 print("Ingrese el ID de la panadería que desea eliminar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 panaderiaManager.delete(id)
-                println("Panadería eliminada correctamente.")
             }
             5 -> {
                 println("==================================")
@@ -422,7 +420,6 @@ fun main() {
 
                     val updatedPan = Pan(id, idPanaderia, nombre, origen, esDulce, precio, stock)
                     panManager.update(updatedPan)
-                    println("Pan actualizado correctamente.")
                 } else {
                     println("No se encontró un pan con el ID especificado.")
                 }
@@ -432,7 +429,6 @@ fun main() {
                 print("Ingrese el ID del pan que desea eliminar:")
                 val id = readLine()?.toIntOrNull() ?: continue
                 panManager.delete(id)
-                println("Pan eliminado correctamente.")
             }
             9 -> {
                 println("==================================")
