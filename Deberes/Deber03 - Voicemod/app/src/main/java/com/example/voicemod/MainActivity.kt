@@ -2,7 +2,6 @@ package com.example.voicemod
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -28,10 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupLongClickListeners() {
-        val button1 = findViewById<Button>(R.id.button1)
-        val button2 = findViewById<Button>(R.id.button1)
+        val button1 = findViewById<Button>(R.id.clean)
 
-        val allButtons: List<Button> = listOf(button1, button2) // Add all your buttons here
+
+        val allButtons: List<Button> = listOf(button1) // Add all your buttons here
 
         allButtons.forEach { button ->
             button.setOnLongClickListener {
