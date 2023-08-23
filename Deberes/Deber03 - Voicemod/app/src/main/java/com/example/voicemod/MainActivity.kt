@@ -1,5 +1,6 @@
 package com.example.voicemod
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
@@ -20,14 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupLongClickListeners()
+
+        val botonConfiguracion = findViewById<Button>(R.id.Settings)
+        botonConfiguracion.setOnClickListener {irActividad(Configuracion::class.java) }
     }
 
     private fun setupLongClickListeners() {
         val button1 = findViewById<Button>(R.id.button1)
-        val button2 = findViewById<Button>(R.id.button2)
-        val button3 = findViewById<Button>(R.id.button3)
+        val button2 = findViewById<Button>(R.id.button1)
 
-        val allButtons: List<Button> = listOf(button1, button2, button3) // Add all your buttons here
+        val allButtons: List<Button> = listOf(button1, button2) // Add all your buttons here
 
         allButtons.forEach { button ->
             button.setOnLongClickListener {
@@ -63,5 +66,12 @@ class MainActivity : AppCompatActivity() {
             popupWindow?.dismiss()
             container.removeView(darkOverlay)
         }, 3000)
+    }
+
+    fun irActividad(
+        clase: Class<*>
+    ){
+        val intent = Intent(this, clase)
+        startActivity(intent)
     }
 }
