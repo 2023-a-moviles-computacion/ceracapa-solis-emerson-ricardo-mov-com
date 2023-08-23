@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private var popupWindow: PopupWindow? = null
+    private var darkOverlay: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,19 +54,18 @@ class MainActivity : AppCompatActivity() {
 
         // Darken the background behind the popup
         val container = findViewById<ViewGroup>(android.R.id.content)
-        val darkOverlay = View(this)
-        darkOverlay.setBackgroundColor(resources.getColor(android.R.color.black))
-        darkOverlay.alpha = 0.5f
+
+        darkOverlay = View(this)
+        darkOverlay?.setBackgroundColor(resources.getColor(android.R.color.black))
+        darkOverlay?.alpha = 0.5f
         container.addView(darkOverlay)
 
         // Set position of popup
         popupWindow?.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0)
 
-        // Remove the popup and dark overlay after 3 seconds
-        Handler().postDelayed({
-            popupWindow?.dismiss()
+        popupWindow?.setOnDismissListener {
             container.removeView(darkOverlay)
-        }, 3000)
+        }
     }
 
     fun irActividad(
