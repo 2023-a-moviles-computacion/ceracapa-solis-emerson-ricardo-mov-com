@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="@color/interactive_button_color" /> <!-- Color de fondo -->
-        <corners android:radius="25dp" /> <!-- Radio para hacerlo redondo -->
-    </shape>
-</selector>
