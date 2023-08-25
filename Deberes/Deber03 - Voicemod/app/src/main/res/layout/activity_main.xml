@@ -66,6 +66,8 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="68dp"
         android:background="@drawable/nuevo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toEndOf="@+id/btnStopSound"
         app:layout_constraintTop_toBottomOf="@+id/btnCartoon" />
 
@@ -86,6 +88,8 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/nuevo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/anadir3"
         app:layout_constraintTop_toBottomOf="@+id/btnHearMS" />
 
@@ -151,6 +155,8 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/cartoon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/anadir"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
@@ -240,6 +246,8 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="88dp"
         android:background="@drawable/hearms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toEndOf="@+id/anadir5"
         app:layout_constraintTop_toBottomOf="@+id/anadir2" />
 
