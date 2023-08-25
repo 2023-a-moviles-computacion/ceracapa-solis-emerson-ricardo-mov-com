@@ -9,12 +9,12 @@
 
 
     <Button
-        android:id="@+id/clean"
-        android:layout_width="80dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="36dp"
+        android:id="@+id/btnClean"
+        android:layout_width="78dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/clean"
+        android:background="@drawable/cleanv2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
@@ -56,18 +56,70 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/nuevo"
-        app:layout_constraintStart_toEndOf="@+id/clean"
+        app:layout_constraintStart_toEndOf="@+id/btnClean"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <Button
+        android:id="@+id/anadir2"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/nuevo"
+        app:layout_constraintStart_toEndOf="@+id/btnStopSound"
+        app:layout_constraintTop_toBottomOf="@+id/btnCartoon" />
+
+    <Button
+        android:id="@+id/anadir3"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/nuevo"
+        app:layout_constraintStart_toEndOf="@+id/anadir4"
+        app:layout_constraintTop_toBottomOf="@+id/anadir5" />
+
+    <Button
+        android:id="@+id/anadir6"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/nuevo"
+        app:layout_constraintStart_toEndOf="@+id/anadir3"
+        app:layout_constraintTop_toBottomOf="@+id/btnHearMS" />
+
+    <Button
+        android:id="@+id/anadir5"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/nuevo"
+        app:layout_constraintStart_toEndOf="@+id/btnMute"
+        app:layout_constraintTop_toBottomOf="@+id/btnStopSound" />
+
+    <Button
+        android:id="@+id/anadir4"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/nuevo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMute" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Clean"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/clean"
-        app:layout_constraintStart_toStartOf="@+id/clean"
-        tools:layout_editor_absoluteY="173dp" />
+        app:layout_constraintEnd_toEndOf="@+id/btnClean"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="@+id/btnClean"
+        app:layout_constraintTop_toBottomOf="@+id/btnClean" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -91,5 +143,116 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnCartoon"
+        android:layout_width="78dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/cartoon"
+        app:layout_constraintStart_toEndOf="@+id/anadir"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Cartoon"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnCartoon"
+        app:layout_constraintStart_toStartOf="@+id/btnCartoon"
+        app:layout_constraintTop_toBottomOf="@+id/btnCartoon" />
+
+    <Button
+        android:id="@+id/btnRandom"
+        android:layout_width="79dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/random"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClean" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="58dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="12dp"
+        android:text="Random Voice"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnRandom"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="@+id/btnRandom"
+        app:layout_constraintTop_toBottomOf="@+id/btnRandom" />
+
+    <Button
+        android:id="@+id/btnStopSound"
+        android:layout_width="79dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/stop"
+        app:layout_constraintStart_toEndOf="@+id/btnRandom"
+        app:layout_constraintTop_toBottomOf="@+id/anadir" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="64dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:text="Stop all sounds"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnStopSound"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="@+id/btnStopSound"
+        app:layout_constraintTop_toBottomOf="@+id/btnStopSound" />
+
+    <Button
+        android:id="@+id/btnMute"
+        android:layout_width="78dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/mute"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRandom" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Mute"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnMute"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="@+id/btnMute"
+        app:layout_constraintTop_toBottomOf="@+id/btnMute" />
+
+    <Button
+        android:id="@+id/btnHearMS"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/hearms"
+        app:layout_constraintStart_toEndOf="@+id/anadir5"
+        app:layout_constraintTop_toBottomOf="@+id/anadir2" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Hear myself"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnHearMS"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnHearMS"
+        app:layout_constraintTop_toBottomOf="@+id/btnHearMS" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

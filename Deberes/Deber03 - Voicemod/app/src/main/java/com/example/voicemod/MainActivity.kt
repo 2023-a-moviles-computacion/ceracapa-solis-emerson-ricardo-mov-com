@@ -27,10 +27,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupLongClickListeners() {
-        val button1 = findViewById<Button>(R.id.clean)
+        val button1 = findViewById<Button>(R.id.btnClean)
+        val button2 = findViewById<Button>(R.id.btnCartoon)
+        val button3 = findViewById<Button>(R.id.btnRandom)
+        val button4 = findViewById<Button>(R.id.btnStopSound)
+        val button5 = findViewById<Button>(R.id.btnHearMS)
+        val button6 = findViewById<Button>(R.id.btnMute)
 
 
-        val allButtons: List<Button> = listOf(button1) // Add all your buttons here
+
+        val allButtons: List<Button> = listOf(button1,button2,button3,button4,button5,button6) // Add all your buttons here
 
         allButtons.forEach { button ->
             button.setOnLongClickListener {
