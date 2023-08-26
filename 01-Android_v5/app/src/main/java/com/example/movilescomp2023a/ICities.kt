@@ -1,4 +1,4 @@
-package com.example.movilescomputacion2023a
+package com.example.movilescomp2023a
 
 class ICities(
     public var name: String?,

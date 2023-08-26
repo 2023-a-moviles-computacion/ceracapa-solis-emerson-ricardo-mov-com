@@ -1,4 +1,4 @@
-package com.example.movilescomputacion2023a
+package com.example.movilescomp2023a
 
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity

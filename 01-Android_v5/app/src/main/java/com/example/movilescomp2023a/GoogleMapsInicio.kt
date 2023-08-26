@@ -1,4 +1,4 @@
-package com.example.movilescomputacion2023a
+package com.example.movilescomp2023a
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.movilescomputacion2023a.databinding.ActivityGoogleMapsInicioBinding
+import com.example.movilescomp2023a.databinding.ActivityGoogleMapsInicioBinding
 
 class GoogleMapsInicio : AppCompatActivity(), OnMapReadyCallback {
 

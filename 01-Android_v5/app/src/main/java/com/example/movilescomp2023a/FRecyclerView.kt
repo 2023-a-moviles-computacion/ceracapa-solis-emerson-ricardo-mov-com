@@ -1,4 +1,4 @@
-package com.example.movilescomputacion2023a
+package com.example.movilescomp2023a
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

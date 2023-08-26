@@ -1,6 +1,5 @@
-package com.example.movilescomputacion2023a
+package com.example.movilescomp2023a
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
