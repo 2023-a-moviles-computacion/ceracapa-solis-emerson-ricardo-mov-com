@@ -110,7 +110,7 @@ class IFirestore : AppCompatActivity() {
         val referenciaEjemploEstudiante = db
             .collection("ejemplo")
         referenciaEjemploEstudiante
-            .document("123456789")
+            .document("12345678")
             .delete()
             .addOnCompleteListener { /* Si todo salio bien */ }
             .addOnFailureListener { /* Si algo salio mal */ }
