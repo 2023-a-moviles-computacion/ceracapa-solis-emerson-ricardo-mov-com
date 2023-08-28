@@ -235,6 +235,7 @@ class IFirestore : AppCompatActivity() {
                     ciudad.id
                     anadirAArregloCiudad(ciudad)
                 }
+                adaptador.notifyDataSetChanged()
             }
             .addOnFailureListener {
                 // Errores
