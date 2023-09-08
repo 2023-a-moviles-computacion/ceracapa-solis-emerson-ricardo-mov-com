@@ -45,7 +45,7 @@ class EditarPanaderia : AppCompatActivity() {
             panaderias.document("${panaderiaSeleccionada.idPanaderia}").update(
                 "nombrePanaderia", editNombre.text.toString(),
                 "ubicacionPanaderia", editUbicacion.text.toString(),
-                "esCafeteriaPanaderia", editEsCafeteria.text.toString(),
+                "esCafeteria", editEsCafeteria.text.toString(),
                 "arriendoPanaderia", editArriendo.text.toString().toDouble(),
                 "anioFundacion", editAnioF.text.toString().toInt()
             )

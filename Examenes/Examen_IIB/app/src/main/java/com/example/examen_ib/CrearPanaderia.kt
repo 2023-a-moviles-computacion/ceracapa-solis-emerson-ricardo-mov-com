@@ -35,7 +35,7 @@ class CrearPanaderia : AppCompatActivity() {
             var panaderia = hashMapOf(
                 "nombrePanaderia" to txtInNombre.text.toString(),
                 "ubicacionPanaderia" to txtInUbicacion.text.toString(),
-                "esCafeteriaPanaderia" to txtInEsCafeteria.text.toString(),
+                "esCafeteria" to txtInEsCafeteria.text.toString(),
                 "arriendoPanaderia" to txtInArriendo.text.toString(),
                 "anioFundacion" to txtInAnioF.text.toString()
             )
