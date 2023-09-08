@@ -19,17 +19,12 @@ import com.google.firebase.ktx.Firebase
 
 class HomePanes : AppCompatActivity() {
     var panaderiaSeleccionada = Panaderia("","","","",0.0,0)
-    var panSeleccionado: Pan? = Pan("","","","","",0.0,0)
     val db = Firebase.firestore
     val panaderias = db.collection("Panaderias")
     var idSelectItem = 0
     var adaptador: ArrayAdapter<Pan>?=null
+    var panSeleccionado: Pan? = Pan("","","","","",0.0,0)
 
-
-
-    var panaderiaPos = 0
-    var itemSelect = 0
-    var idPanaderia = 0
 
     var resultAddPan = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -59,41 +54,6 @@ class HomePanes : AppCompatActivity() {
         setContentView(R.layout.activity_home_panes)
     }
 
-
-    fun listViewPanes(){
-        val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
-            .collection("Panes")
-            .whereEqualTo("idPanaderia","${panaderiaSeleccionada.idPanaderia}")
-
-        val lv_panes = findViewById<ListView>(R.id.lv_panes_lista)
-        panaderiaSubCollection.get().addOnSuccessListener { result->
-            var listaPanes = arrayListOf<Pan>()
-            for(document in result){
-                listaPanes.add(
-                    Pan(
-                        document.id.toString(),
-                        document.data.get("idPan").toString(),
-                        document.data.get("nombrePan").toString(),
-                        document.data.get("origenPan").toString(),
-                        document.data.get("esDulce").toString(),
-                        document.data.get("precioPan").toString().toDouble(),
-                        document.data.get("stockPan").toString().toInt()
-                    )
-                )
-            }
-            adaptador == ArrayAdapter(
-                this,
-                android.R.layout.simple_expandable_list_item_1,
-                listaPanes
-            )
-            lv_panes.adapter = adaptador
-            adaptador!!.notifyDataSetChanged()
-
-            registerForContextMenu(lv_panes)
-        }
-
-
-    }
 
     override fun onStart() {
         super.onStart()
@@ -159,6 +119,41 @@ class HomePanes : AppCompatActivity() {
             }
             else -> super.onContextItemSelected(item)
         }
+    }
+
+    fun listViewPanes(){
+        val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+            .collection("Panes")
+            .whereEqualTo("idPanaderia","${panaderiaSeleccionada.idPanaderia}")
+
+        val lv_panes = findViewById<ListView>(R.id.lv_panes_lista)
+        panaderiaSubCollection.get().addOnSuccessListener { result->
+            var listaPanes = arrayListOf<Pan>()
+            for(document in result){
+                listaPanes.add(
+                    Pan(
+                        document.id.toString(),
+                        document.data.get("idPanaderia").toString(),
+                        document.data.get("nombrePan").toString(),
+                        document.data.get("origenPan").toString(),
+                        document.data.get("esDulce").toString(),
+                        document.data.get("precioPan").toString().toDouble(),
+                        document.data.get("stockPan").toString().toInt()
+                    )
+                )
+            }
+            adaptador == ArrayAdapter(
+                this,
+                android.R.layout.simple_expandable_list_item_1,
+                listaPanes
+            )
+            lv_panes.adapter = adaptador
+            adaptador!!.notifyDataSetChanged()
+
+            registerForContextMenu(lv_panes)
+        }
+
+
     }
 
     fun abrirActividadAddPan(

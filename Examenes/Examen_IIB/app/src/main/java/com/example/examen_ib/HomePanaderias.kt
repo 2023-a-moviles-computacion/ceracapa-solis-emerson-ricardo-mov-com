@@ -81,7 +81,7 @@ class HomePanaderias :  AppCompatActivity() {
             R.id.mi_panes -> {
                 Log.i("context-menu", "Panes: ${idSelectItem}")
                 val abrirHomePanes = Intent(this, HomePanes::class.java)
-                abrirHomePanes.putExtra("PosPanesX",panaderiaSeleccionada)
+                abrirHomePanes.putExtra("posicionPanaderia",panaderiaSeleccionada)
                 startActivity(abrirHomePanes)
                 return true
             }

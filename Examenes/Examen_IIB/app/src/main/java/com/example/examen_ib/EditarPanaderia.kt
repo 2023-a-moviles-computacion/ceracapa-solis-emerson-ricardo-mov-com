@@ -45,27 +45,22 @@ class EditarPanaderia : AppCompatActivity() {
             panaderias.document("${panaderiaSeleccionada.idPanaderia}").update(
                 "nombrePanaderia", editNombre.text.toString(),
                 "ubicacionPanaderia", editUbicacion.text.toString(),
-                "esCafePanaderia", editEsCafeteria.text.toString(),
+                "esCafeteriaPanaderia", editEsCafeteria.text.toString(),
                 "arriendoPanaderia", editArriendo.text.toString().toDouble(),
-                "anioFPanaderia", editAnioF.text.toString().toInt()
+                "anioFundacion", editAnioF.text.toString().toInt()
             )
 
             Toast.makeText(this,"Panaderia actualizada con exito", Toast.LENGTH_SHORT).show()
 
             val intentEditSucces = Intent(this, HomePanaderias::class.java)
             startActivity(intentEditSucces)
+        }
 
-            val btnCancelarEditar = findViewById<Button>(R.id.btn_cancelar_editar)
-            btnCancelarEditar.setOnClickListener{
-                val intentEditCancel = Intent(this, HomePanaderias::class.java)
-                startActivity(intentEditCancel)
-            }
+        val btnCancelarEditar = findViewById<Button>(R.id.btn_cancelar_editar)
+        btnCancelarEditar.setOnClickListener{
+            val intentEditCancel = Intent(this, HomePanaderias::class.java)
+            startActivity(intentEditCancel)
         }
     }
-
-
-
-
-
 
 }
