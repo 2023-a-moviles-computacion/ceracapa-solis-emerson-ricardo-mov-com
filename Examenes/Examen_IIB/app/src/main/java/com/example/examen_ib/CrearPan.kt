@@ -14,8 +14,6 @@ class CrearPan : AppCompatActivity() {
     var panaderiaSeleccionada = Panaderia("","","","",0.0,0)
     val db = Firebase.firestore
     val panaderias = db.collection("Panaderias")
-    val panes = db.collection("Panes")
-    var idSelectPan = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +24,8 @@ class CrearPan : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         Log.i("ciclo-vida","onStart")
+
 
         panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderia")!!
         val panaderiaSubColeccion = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
@@ -45,12 +43,12 @@ class CrearPan : AppCompatActivity() {
         var btnAddPan = findViewById<Button>(R.id.btn_crearPan)
         btnAddPan.setOnClickListener {
             var pan = hashMapOf(
-                "idPanaderia" to panaderiaSeleccionada.idPanaderia,
                 "nombrePan" to txtInNombre.text.toString(),
                 "origenPan" to txtInOrigen.text.toString(),
                 "esDulce" to txtInEsDulce.text.toString(),
                 "precioPan" to txtInPrecio.text.toString(),
-                "stockPan" to txtInStock.text.toString()
+                "stockPan" to txtInStock.text.toString(),
+                "idPanaderia_Pan" to panaderiaSeleccionada.idPanaderia,
             )
             panaderiaSubColeccion.add(pan).addOnSuccessListener {
                 Toast.makeText(this, "Pan registrado con exito", Toast.LENGTH_SHORT).show();
@@ -59,8 +57,8 @@ class CrearPan : AppCompatActivity() {
                 Log.i("Crear-Pan", "Failed")
             }
 
-            val intentAddSucces = Intent(this, HomePanes::class.java)
-            startActivity(intentAddSucces)
+            answer()
+
         }
 
 

@@ -36,6 +36,11 @@ class EditarPan : AppCompatActivity() {
         val editPrecioPan = findViewById<TextInputEditText>(R.id.txtIn_precioPan_editar)
         val editStockPan = findViewById<TextInputEditText>(R.id.txtIn_stockPan_editar)
 
+        editNombrePan.setText(panSeleccionado.nombrePan.toString())
+        editOrigenPan.setText(panSeleccionado.origenPan.toString())
+        editDulcePan.setText(panSeleccionado.esDulce.toString())
+        editPrecioPan.setText(panSeleccionado.precioPan.toString())
+        editStockPan.setText(panSeleccionado.stockPan.toString())
         // ------------------ o ------------------
 
         val btnEditPan = findViewById<Button>(R.id.btn_editarPan)
@@ -50,10 +55,17 @@ class EditarPan : AppCompatActivity() {
                     "precioPan", editPrecioPan.text.toString().toDouble(),
                     "stockPan", editStockPan.text.toString().toInt()
                 )
-            Toast.makeText(this,"Pan actualizado con exito", Toast.LENGTH_SHORT).show()
-            val intentEditSucces = Intent(this, HomePanes::class.java)
-            startActivity(intentEditSucces)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Pan actualizado con éxito", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "${panaderiaSeleccionada.idPanaderia}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "${panSeleccionado.idPan}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error al actualizar el pan: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            //Toast.makeText(this,"Pan actualizado con exito", Toast.LENGTH_SHORT).show()
 
+            answer()
         }
 
 

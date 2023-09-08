@@ -104,7 +104,7 @@ class HomePanes : AppCompatActivity() {
             }
             R.id.mi_eliminarPan -> {
                 Log.i("context-menu", "Delete position: ${idSelectItem}")
-                val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+                val panaderiaSubColeccion = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
                     .collection("Panes")
                     .document("${panSeleccionado!!.idPan}")
                     .delete()
@@ -122,18 +122,18 @@ class HomePanes : AppCompatActivity() {
     }
 
     fun listViewPanes(){
-        val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+        val panaderiaSubColeccion = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
             .collection("Panes")
-            .whereEqualTo("idPanaderia","${panaderiaSeleccionada.idPanaderia}")
+            .whereEqualTo("idPanaderia_Pan","${panaderiaSeleccionada.idPanaderia}")
 
         val lv_panes = findViewById<ListView>(R.id.lv_panes_lista)
-        panaderiaSubCollection.get().addOnSuccessListener { result->
+        panaderiaSubColeccion.get().addOnSuccessListener { result->
             var listaPanes = arrayListOf<Pan>()
             for(document in result){
                 listaPanes.add(
                     Pan(
                         document.id.toString(),
-                        document.data.get("idPanaderia").toString(),
+                        document.data.get("idPanaderia_Pan").toString(),
                         document.data.get("nombrePan").toString(),
                         document.data.get("origenPan").toString(),
                         document.data.get("esDulce").toString(),
