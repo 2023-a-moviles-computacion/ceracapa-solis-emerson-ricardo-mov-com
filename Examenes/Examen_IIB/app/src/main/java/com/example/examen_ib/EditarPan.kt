@@ -63,7 +63,6 @@ class EditarPan : AppCompatActivity() {
                     Toast.makeText(this, "${panSeleccionado.idPan}", Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, "Error al actualizar el pan: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
-            //Toast.makeText(this,"Pan actualizado con exito", Toast.LENGTH_SHORT).show()
 
             answer()
         }
