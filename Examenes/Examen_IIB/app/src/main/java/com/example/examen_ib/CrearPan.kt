@@ -45,10 +45,10 @@ class CrearPan : AppCompatActivity() {
         var btnAddPan = findViewById<Button>(R.id.btn_crearPan)
         btnAddPan.setOnClickListener {
             var pan = hashMapOf(
-                "idPanaderia_Pan" to panaderiaSeleccionada.idPanaderia,
+                "idPanaderia" to panaderiaSeleccionada.idPanaderia,
                 "nombrePan" to txtInNombre.text.toString(),
                 "origenPan" to txtInOrigen.text.toString(),
-                "esDulcePan" to txtInEsDulce.text.toString(),
+                "esDulce" to txtInEsDulce.text.toString(),
                 "precioPan" to txtInPrecio.text.toString(),
                 "stockPan" to txtInStock.text.toString()
             )

@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 class Pan(
     var idPanaderia_Pan: String?,
-    var  idPan: String?,
+    var idPan: String?,
     var nombrePan: String?,
     var origenPan: String?,
     var esDulce: String?,

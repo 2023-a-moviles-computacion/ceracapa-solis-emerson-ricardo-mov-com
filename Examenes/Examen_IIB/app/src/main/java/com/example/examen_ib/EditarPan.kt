@@ -46,7 +46,7 @@ class EditarPan : AppCompatActivity() {
                 .update(
                     "nombrePan", editNombrePan.text.toString(),
                     "origenPan", editOrigenPan.text.toString(),
-                    "esDulcePan", editDulcePan.text.toString(),
+                    "esDulce", editDulcePan.text.toString(),
                     "precioPan", editPrecioPan.text.toString().toDouble(),
                     "stockPan", editStockPan.text.toString().toInt()
                 )

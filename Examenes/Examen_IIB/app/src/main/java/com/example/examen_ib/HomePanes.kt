@@ -142,7 +142,7 @@ class HomePanes : AppCompatActivity() {
                     )
                 )
             }
-            adaptador == ArrayAdapter(
+            adaptador = ArrayAdapter(
                 this,
                 android.R.layout.simple_expandable_list_item_1,
                 listaPanes
