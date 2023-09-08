@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Panaderia(
-    var idPanaderia: Int,
+    var idPanaderia: String?,
     var nombrePanaderia: String?,
     var ubicacionPanaderia: String?,
     var esCafeteria: String?,
@@ -16,7 +16,7 @@ class Panaderia(
     }
 
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -26,7 +26,7 @@ class Panaderia(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(idPanaderia)
+        parcel.writeString(idPanaderia)
         parcel.writeString(nombrePanaderia)
         parcel.writeString(ubicacionPanaderia)
         parcel.writeString(esCafeteria)

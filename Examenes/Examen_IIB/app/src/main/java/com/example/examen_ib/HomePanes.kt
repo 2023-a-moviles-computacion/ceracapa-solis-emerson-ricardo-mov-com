@@ -14,10 +14,19 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class HomePanes : AppCompatActivity() {
-
+    var panaderiaSeleccionada = Panaderia("","","","",0.0,0)
+    var panSeleccionado: Pan? = Pan("","","","","",0.0,0)
+    val db = Firebase.firestore
+    val panaderias = db.collection("Panaderias")
     var idSelectItem = 0
+    var adaptador: ArrayAdapter<Pan>?=null
+
+
+
     var panaderiaPos = 0
     var itemSelect = 0
     var idPanaderia = 0
@@ -28,8 +37,7 @@ class HomePanes : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK){
             if(result.data != null){
                 val data = result.data
-                panaderiaPos = data?.getIntExtra("posicionPanaderia",0)!!
-                actualizarListaPanes()
+                panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderia")!!
             }
         }
     }
@@ -40,7 +48,7 @@ class HomePanes : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK){
             if(result.data != null){
                 val data = result.data
-                panaderiaPos = data?.getIntExtra("posicionPanaderia",0)!!
+                panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderia")!!
             }
         }
     }
@@ -52,63 +60,51 @@ class HomePanes : AppCompatActivity() {
     }
 
 
-    fun listViewPanes():ArrayList<Pan>{
-        var listaIDPanes = arrayListOf<Int>()
+    fun listViewPanes(){
+        val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+            .collection("Panes")
+            .whereEqualTo("idPanaderia","${panaderiaSeleccionada.idPanaderia}")
 
-        Registers.arregloPanaderiasPanes.forEachIndexed { indice: Int, pp: PanaderiasPanes ->
-            if(pp.idPanaderia == idPanaderia){
-                listaIDPanes.add(pp.idPan)
+        val lv_panes = findViewById<ListView>(R.id.lv_panes_lista)
+        panaderiaSubCollection.get().addOnSuccessListener { result->
+            var listaPanes = arrayListOf<Pan>()
+            for(document in result){
+                listaPanes.add(
+                    Pan(
+                        document.id.toString(),
+                        document.data.get("idPan").toString(),
+                        document.data.get("nombrePan").toString(),
+                        document.data.get("origenPan").toString(),
+                        document.data.get("esDulce").toString(),
+                        document.data.get("precioPan").toString().toDouble(),
+                        document.data.get("stockPan").toString().toInt()
+                    )
+                )
             }
+            adaptador == ArrayAdapter(
+                this,
+                android.R.layout.simple_expandable_list_item_1,
+                listaPanes
+            )
+            lv_panes.adapter = adaptador
+            adaptador!!.notifyDataSetChanged()
+
+            registerForContextMenu(lv_panes)
         }
-        var panList = arrayListOf<Pan>()
-        PanaderiaBDD.TablaPanaderia!!.listarPanes().forEachIndexed { index : Int, pan: Pan ->
-                for(i in listaIDPanes){
-                    if(i==pan.idPan){
-                        panList.add(pan)
-                    }
-                }
-            }
 
-        return panList
+
     }
-
-    private fun actualizarListaPanes() {
-        val listViewPan = findViewById<ListView>(R.id.lv_panes_lista)
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            listViewPanes()
-        )
-        listViewPan.adapter = adaptador
-        adaptador.notifyDataSetChanged()
-    }
-
 
     override fun onStart() {
         super.onStart()
         Log.i("ciclo-vida", "onStart")
 
-        panaderiaPos = intent.getIntExtra("posicionEditar",1)
-        PanaderiaBDD.TablaPanaderia!!.listarPanaderias().forEachIndexed { indice: Int, panaderia: Panaderia ->
-            if(indice==panaderiaPos){
-                val txtPanaderiaName = findViewById<TextView>(R.id.tv_nombrePanaderia)
-                txtPanaderiaName.setText("Panadería: "+panaderia.nombrePanaderia)
-                idPanaderia = panaderia.idPanaderia
-            }
-        }
+        panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderia")!!
+        listViewPanes()
 
-        val listViewPan = findViewById<ListView>(R.id.lv_panes_lista)
+        val txtNombrePanaderia = findViewById<TextView>(R.id.tv_nombrePanaderia)
+        txtNombrePanaderia.setText("Panaderia: "+panaderiaSeleccionada.nombrePanaderia)
 
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            listViewPanes()
-        )
-
-        listViewPan.adapter = adaptador
-        adaptador.notifyDataSetChanged()
-
-        this.registerForContextMenu(listViewPan)
 
         val btnNewPan = findViewById<Button>(R.id.btn_crear_new_pan)
         btnNewPan.setOnClickListener {
@@ -121,21 +117,6 @@ class HomePanes : AppCompatActivity() {
             startActivity(intentBackPan)
         }
 
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        val panListView = findViewById<ListView>(R.id.lv_panes_lista)
-
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            listViewPanes()
-        )
-        panListView.adapter = adaptador
-        adaptador.notifyDataSetChanged()
     }
 
 
@@ -148,15 +129,13 @@ class HomePanes : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_panes, menu)
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
-        val id = info.position
-        itemSelect = id
-        val idR=listViewPanes()[id].idPan
-        idSelectItem = idR
-        Log.i("context-menu", "ID Pan ${id}")
+        idSelectItem = info.position
+        Log.i("context-menu", "ID Pan ${idSelectItem}")
     }
 
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        panSeleccionado = adaptador!!.getItem(idSelectItem)
         return when (item.itemId) {
             R.id.mi_editarPan -> {
                 Log.i("context-menu", "Edit position: ${idSelectItem}")
@@ -165,8 +144,17 @@ class HomePanes : AppCompatActivity() {
             }
             R.id.mi_eliminarPan -> {
                 Log.i("context-menu", "Delete position: ${idSelectItem}")
-                PanaderiaBDD.TablaPanaderia!!.eliminarPan(idSelectItem)
-                actualizarListaPanes()
+                val panaderiaSubCollection = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+                    .collection("Panes")
+                    .document("${panSeleccionado!!.idPan}")
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.i("Eliminar-Pan","Success")
+                    }
+                    .addOnFailureListener{
+                        Log.i("Eliminar-Pan","Failed")
+                    }
+                listViewPanes()
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -177,8 +165,7 @@ class HomePanes : AppCompatActivity() {
         clase: Class<*>
     ) {
         val intentAddNewPan = Intent(this, clase)
-        intentAddNewPan.putExtra("posicionPanaderia",panaderiaPos)
-        Log.i("positionSend","${panaderiaPos}")
+        intentAddNewPan.putExtra("posicionPanaderia",panaderiaSeleccionada)
         resultAddPan.launch(intentAddNewPan)
     }
 
@@ -186,8 +173,8 @@ class HomePanes : AppCompatActivity() {
         clase: Class<*>
     ) {
         val intentEditPan = Intent(this, clase)
-        intentEditPan.putExtra("Pan", idSelectItem)
-        intentEditPan.putExtra("posicionPanaderiaEditar", panaderiaPos)
+        intentEditPan.putExtra("pan", panSeleccionado)
+        intentEditPan.putExtra("posicionPanaderiaEditar", panaderiaSeleccionada)
         resultEditPan.launch(intentEditPan)
     }
 }

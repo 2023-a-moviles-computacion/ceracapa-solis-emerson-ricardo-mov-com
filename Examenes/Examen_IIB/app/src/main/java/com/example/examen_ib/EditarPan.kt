@@ -4,11 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class EditarPan : AppCompatActivity() {
-    var panaderiaPos = 0
+    var panaderiaSeleccionada = Panaderia("","","","",0.0,0)
+    var panSeleccionado = Pan("","","","","",0.0,0)
+    val db = Firebase.firestore
+    val panaderias = db.collection("Panaderias")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +25,8 @@ class EditarPan : AppCompatActivity() {
         Log.i("ciclo-vida", "onStart")
         super.onStart()
 
-        panaderiaPos = intent.getIntExtra("posicionPanaderiaEditar",1)
+        panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderiaEditar")!!
+        panSeleccionado = intent.getParcelableExtra<Pan>("pan")!!
 
         // ------------------ o ------------------
 
@@ -31,39 +38,24 @@ class EditarPan : AppCompatActivity() {
 
         // ------------------ o ------------------
 
-        var idPan = intent.getIntExtra("Pan",1)
-
-        // ------------------ o ------------------
-
-        PanaderiaBDD.TablaPanaderia!!.listarPanes().forEachIndexed { indice: Int, pan: Pan ->
-            if(pan.idPan == idPan){
-                // Llenar los campos
-                editNombrePan.setText(pan.nombrePan)
-                editOrigenPan.setText(pan.origenPan)
-                editDulcePan.setText(pan.esDulce)
-                editPrecioPan.setText(pan.precioPan.toString())
-                editStockPan.setText(pan.stockPan.toString())
-            }
-        }
-
-        // ------------------ o ------------------
-
         val btnEditPan = findViewById<Button>(R.id.btn_editarPan)
         btnEditPan.setOnClickListener {
-            var nombrePan = editNombrePan.text.toString()
-            var origenPan = editOrigenPan.text.toString()
-            var esDulcePan = editDulcePan.text.toString()
-            var precioPan = editPrecioPan.text.toString().toDouble()
-            var stockPan = editStockPan.text.toString().toInt()
+            panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+                .collection("Panes")
+                .document("${panSeleccionado.idPan}")
+                .update(
+                    "nombrePan", editNombrePan.text.toString(),
+                    "origenPan", editOrigenPan.text.toString(),
+                    "esDulcePan", editDulcePan.text.toString(),
+                    "precioPan", editPrecioPan.text.toString().toDouble(),
+                    "stockPan", editStockPan.text.toString().toInt()
+                )
+            Toast.makeText(this,"Pan actualizado con exito", Toast.LENGTH_SHORT).show()
+            val intentEditSucces = Intent(this, HomePanes::class.java)
+            startActivity(intentEditSucces)
 
-            PanaderiaBDD.TablaPanaderia!!.actualizarPan(idPan,nombrePan,origenPan,esDulcePan,
-                precioPan.toString(), stockPan.toString())
-
-            answer()
         }
 
-
-        // ------------------ o ------------------
 
         val btnCancelPan = findViewById<Button>(R.id.btn_cancelar_editar_pan)
         btnCancelPan.setOnClickListener {
@@ -75,7 +67,7 @@ class EditarPan : AppCompatActivity() {
 
     fun answer(){
         val intentReturnParameters = Intent()
-        intentReturnParameters.putExtra("posicionPanaderiaEditar",panaderiaPos)
+        intentReturnParameters.putExtra("posicionPanaderiaEditar",panaderiaSeleccionada)
         setResult(
             RESULT_OK,
             intentReturnParameters

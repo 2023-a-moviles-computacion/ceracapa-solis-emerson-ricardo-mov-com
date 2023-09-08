@@ -9,8 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        PanaderiaBDD.TablaPanaderia = ESqliteHelperPanaderiaPan (this)
-        Registers.arregloPanaderiasPanes
+
         val btnStart = findViewById<Button>(R.id.btn_examStart)
         btnStart.setOnClickListener{
             val intent = Intent(this, HomePanaderias::class.java)

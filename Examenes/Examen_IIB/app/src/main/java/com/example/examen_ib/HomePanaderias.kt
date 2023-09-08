@@ -9,11 +9,15 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class HomePanaderias :  AppCompatActivity() {
-
+    val db = Firebase.firestore
+    val panaderias = db.collection("Panaderias")
     var idSelectItem = 0
+    var adaptador: ArrayAdapter<Panaderia>?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,16 +31,7 @@ class HomePanaderias :  AppCompatActivity() {
         super.onStart()
         Log.i("ciclo-vida", "onStart")
 
-        val listViewPanaderia = findViewById<ListView>(R.id.lv_panaderias_lista)
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            PanaderiaBDD.TablaPanaderia!!.listarPanaderias()
-        )
-        listViewPanaderia.adapter = adaptador
-        adaptador.notifyDataSetChanged()
-
-        this.registerForContextMenu(listViewPanaderia)
+        listarPanaderias()
 
         val btnAnadirPanaderia = findViewById<Button>(R.id.btn_crear_new_panaderia)
         btnAnadirPanaderia.setOnClickListener {
@@ -44,36 +39,6 @@ class HomePanaderias :  AppCompatActivity() {
             startActivity(intentAddPanaderia)
         }
 
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.run {
-            // Guardar las variables
-            // primitivos
-            putInt("idItemSeleccionado",idSelectItem)
-            putParcelableArrayList("arregloPanaderia",PanaderiaBDD.TablaPanaderia!!.listarPanaderias())
-            putParcelableArrayList("arregloPP",Registers.arregloPanaderiasPanes)
-
-        }
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        idSelectItem = savedInstanceState.getInt("idItemSeleccionado")
-
-        Registers.arregloPanaderiasPanes = savedInstanceState.getParcelableArrayList<PanaderiasPanes>("arregloPP")!!
-        if (idSelectItem == null){
-            idSelectItem = 0
-        }
-        val listViewPanaderia = findViewById<ListView>(R.id.lv_panaderias_lista)
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            PanaderiaBDD.TablaPanaderia!!.listarPanaderias()
-        )
-        listViewPanaderia.adapter = adaptador
-        adaptador.notifyDataSetChanged()
     }
 
     override fun onCreateContextMenu(
@@ -91,39 +56,66 @@ class HomePanaderias :  AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        var panaderiaSeleccionada:Panaderia = adaptador!!.getItem(idSelectItem)!!
+
         return when (item.itemId) {
             R.id.mi_editar -> {
-                Log.i("context-menu", "Edit position: ${idSelectItem}")
-                abrirActividadConParametros(EditarPanaderia::class.java)
+                Log.i("context-menu", "Edit position: ${panaderiaSeleccionada.idPanaderia}")
+                val abrirEditarPanaderia = Intent(this,EditarPanaderia::class.java)
+                abrirEditarPanaderia.putExtra("PosPanaderia",panaderiaSeleccionada)
+                startActivity(abrirEditarPanaderia)
                 return true
             }
             R.id.mi_eliminar -> {
                 Log.i("context-menu", "Delete position: ${idSelectItem}")
-                PanaderiaBDD.TablaPanaderia!!.eliminarPanaderia(idSelectItem)
-                val listViewPanaderia = findViewById<ListView>(R.id.lv_panaderias_lista)
-                val adaptador = ArrayAdapter(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    PanaderiaBDD.TablaPanaderia!!.listarPanaderias()
-                )
-                listViewPanaderia.adapter = adaptador
-                adaptador.notifyDataSetChanged()
+                panaderias.document("${panaderiaSeleccionada.idPanaderia}").delete()
+                    .addOnSuccessListener {
+                        Log.i("Eliminar-Panaderia","Success")
+                    }
+                    .addOnFailureListener {
+                        Log.i("Eliminar-Panaderia","Failed")
+                    }
+                listarPanaderias()
                 return true
             }
             R.id.mi_panes -> {
                 Log.i("context-menu", "Panes: ${idSelectItem}")
-                abrirActividadConParametros(HomePanes::class.java)
+                val abrirHomePanes = Intent(this, HomePanes::class.java)
+                abrirHomePanes.putExtra("PosPanesX",panaderiaSeleccionada)
+                startActivity(abrirHomePanes)
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
     }
 
-    fun abrirActividadConParametros(
-        clase: Class<*>
-    ) {
-        val intentEditarPanaderia = Intent(this, clase)
-        intentEditarPanaderia.putExtra("posicionEditar", idSelectItem)
-        startActivity(intentEditarPanaderia)
+
+    fun listarPanaderias(){
+        val lv_panaderias = findViewById<ListView>(R.id.lv_panaderias_lista)
+        panaderias.get().addOnSuccessListener { result->
+            var listPanaderias = arrayListOf<Panaderia>()
+            for(document in result){
+                listPanaderias.add(
+                    Panaderia(
+                        document.id.toString(),
+                        document.get("nombrePanaderia").toString(),
+                        document.get("ubicacionPanaderia").toString(),
+                        document.get("esCafeteria").toString(),
+                        document.get("arriendoPanaderia").toString().toDouble(),
+                        document.get("anioFundacion").toString().toInt(),
+                    )
+                )
+            }
+            adaptador = ArrayAdapter(
+                this,
+                android.R.layout.simple_expandable_list_item_1,
+                listPanaderias
+            )
+            lv_panaderias.adapter = adaptador
+            adaptador!!.notifyDataSetChanged()
+            registerForContextMenu(lv_panaderias)
+        }.addOnFailureListener {
+            Log.i("Error", "Creacion de lista de panaderias fallida")
+        }
     }
 }

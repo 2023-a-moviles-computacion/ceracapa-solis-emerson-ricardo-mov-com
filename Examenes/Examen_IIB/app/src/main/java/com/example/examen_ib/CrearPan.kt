@@ -4,18 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CrearPan : AppCompatActivity() {
-    var nextIdPan = 0
-    var lastIdPan = 0
+    var panaderiaSeleccionada = Panaderia("","","","",0.0,0)
+    val db = Firebase.firestore
+    val panaderias = db.collection("Panaderias")
+    val panes = db.collection("Panes")
+    var idSelectPan = 0
 
-    var nextIdPP = 0
-    var lastIdPP = 0
-    var idSelectedPan = 0
-    var panaderiaPos = 0
-    var idSelectedPanaderia = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("ciclo-vida","onCreate")
@@ -27,34 +28,11 @@ class CrearPan : AppCompatActivity() {
         super.onStart()
 
         Log.i("ciclo-vida","onStart")
-        panaderiaPos = intent.getIntExtra("posicionPanaderia",-1)
-        Log.i("posPanaderia","${panaderiaPos}")
 
-        PanaderiaBDD.TablaPanaderia!!.listarPanaderias().forEachIndexed { indice: Int, panaderia: Panaderia ->
-            if(indice==panaderiaPos){
-                idSelectedPanaderia = panaderia.idPanaderia
-            }
-        }
+        panaderiaSeleccionada = intent.getParcelableExtra<Panaderia>("posicionPanaderia")!!
+        val panaderiaSubColeccion = panaderias.document("${panaderiaSeleccionada.idPanaderia}")
+            .collection("Panes")
 
-        var longListPan = PanaderiaBDD.TablaPanaderia!!.listarPanes().lastIndex
-
-        PanaderiaBDD.TablaPanaderia!!.listarPanes().forEachIndexed { indice: Int, pan: Pan ->
-            Log.i("testExamen","${pan.idPan} -> ${pan.nombrePan}")
-            if(indice == longListPan){
-                lastIdPan = pan.idPan
-            }
-        }
-        nextIdPan = lastIdPan+1
-
-        var longPP = Registers.arregloPanaderiasPanes.lastIndex
-        Registers.arregloPanaderiasPanes.forEachIndexed { indice: Int, panaderiasPanes: PanaderiasPanes ->
-            if(indice==longPP)
-                lastIdPP = panaderiasPanes.idPanaderiaPan
-        }
-        nextIdPP = lastIdPP+1
-
-
-        // ------------ o ------------
 
         var txtInNombre = findViewById<TextInputEditText>(R.id.txtIn_nombrePan_crear)
         var txtInOrigen = findViewById<TextInputEditText>(R.id.txtIn_origenPan_crear)
@@ -62,22 +40,28 @@ class CrearPan : AppCompatActivity() {
         var txtInPrecio = findViewById<TextInputEditText>(R.id.txtIn_precioPan_crear)
         var txtInStock = findViewById<TextInputEditText>(R.id.txtIn_stockPan_crear)
 
+        Log.i("posPan", "${panaderiaSeleccionada.idPanaderia}")
+
         var btnAddPan = findViewById<Button>(R.id.btn_crearPan)
         btnAddPan.setOnClickListener {
-            var nombrePan = txtInNombre.text.toString()
-            var origenPan = txtInOrigen.text.toString()
-            var esDulcePan = txtInEsDulce.text.toString()
-            val precioPan = txtInPrecio.text.toString()
-            var stockPan = txtInStock.text.toString()
+            var pan = hashMapOf(
+                "nombrePan" to txtInNombre.text.toString(),
+                "origenPan" to txtInOrigen.text.toString(),
+                "esDulcePan" to txtInEsDulce.text.toString(),
+                "precioPan" to txtInPrecio.text.toString(),
+                "stockPan" to txtInStock.text.toString()
+            )
+            panaderiaSubColeccion.add(pan).addOnSuccessListener {
+                Toast.makeText(this, "Pan registrado con exito", Toast.LENGTH_SHORT).show();
+                Log.i("Crear-Pan", "Success")
+            }.addOnFailureListener {
+                Log.i("Crear-Pan", "Failed")
+            }
 
-            Registers.arregloPanaderiasPanes.add(PanaderiasPanes(nextIdPP, idSelectedPanaderia, nextIdPan))
-
-            PanaderiaBDD.TablaPanaderia!!.crearPan(nextIdPan, nombrePan,origenPan,esDulcePan,precioPan,stockPan)
-
-            answer()
+            val intentAddSucces = Intent(this, HomePanes::class.java)
+            startActivity(intentAddSucces)
         }
 
-        // ------------ o ------------
 
         var btnCancelarCrearPan = findViewById<Button>(R.id.btn_cancelar_crear_pan)
         btnCancelarCrearPan.setOnClickListener {
@@ -89,7 +73,7 @@ class CrearPan : AppCompatActivity() {
 
     fun answer(){
         val intentReturnParameters = Intent()
-        intentReturnParameters.putExtra("posicionPanaderia",panaderiaPos)
+        intentReturnParameters.putExtra("posicionPanaderia",panaderiaSeleccionada)
         setResult(
             RESULT_OK,
             intentReturnParameters

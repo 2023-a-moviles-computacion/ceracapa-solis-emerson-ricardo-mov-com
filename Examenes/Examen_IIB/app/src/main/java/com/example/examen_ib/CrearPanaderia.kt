@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class CrearPanaderia : AppCompatActivity() {
 
-    var id1 = 0
-    var id2 = 0
-
-    var nombrePanaderia = ""
-    var ubicacionPanaderia = ""
-    var esCafeteriaPanaderia = ""
-    var arriendoPanaderia = ""
-    var anioFundacion = ""
+    val db = Firebase.firestore
+    val panaderias = db.collection("Panaderias")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +22,6 @@ class CrearPanaderia : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i("cicloVida", "onStart")
-        var longListPanaderia = PanaderiaBDD.TablaPanaderia!!.listarPanaderias().lastIndex
-        PanaderiaBDD.TablaPanaderia!!.listarPanaderias().forEachIndexed { indice: Int, panaderia: Panaderia ->
-            Log.i("testExamen","${panaderia.idPanaderia} -> ${panaderia.nombrePanaderia}")
-            if( indice == longListPanaderia){
-                id2 = panaderia.idPanaderia
-            }
-        }
-
-        id1 = id2+1
 
         var txtInNombre = findViewById<TextInputEditText>(R.id.txtIn_nombrePanaderia_crear)
         var txtInUbicacion = findViewById<TextInputEditText>(R.id.txtIn_ubicacionPanaderia_crear)
@@ -45,14 +32,27 @@ class CrearPanaderia : AppCompatActivity() {
         var btnCrearPanaderia = findViewById<Button>(R.id.btn_crearPanaderia)
 
         btnCrearPanaderia.setOnClickListener {
-            nombrePanaderia = txtInNombre.text.toString()
-            ubicacionPanaderia = txtInUbicacion.text.toString()
-            esCafeteriaPanaderia = txtInEsCafeteria.text.toString()
-            arriendoPanaderia = txtInArriendo.text.toString()
-            anioFundacion = txtInAnioF.text.toString()
+            var panaderia = hashMapOf(
+                "nombrePanaderia" to txtInNombre.text.toString(),
+                "ubicacionPanaderia" to txtInUbicacion.text.toString(),
+                "esCafeteriaPanaderia" to txtInEsCafeteria.text.toString(),
+                "arriendoPanaderia" to txtInArriendo.text.toString(),
+                "anioFundacion" to txtInAnioF.text.toString()
+            )
 
-            PanaderiaBDD.TablaPanaderia!!.crearPanaderia(id1,nombrePanaderia,ubicacionPanaderia,
-                esCafeteriaPanaderia, arriendoPanaderia, anioFundacion)
+            panaderias.add(panaderia).addOnSuccessListener {
+                txtInNombre.text!!.clear()
+                txtInUbicacion.text!!.clear()
+                txtInEsCafeteria.text!!.clear()
+                txtInArriendo.text!!.clear()
+                txtInAnioF.text!!.clear()
+
+                Toast.makeText(this,"Panaderia registrada con exito", Toast.LENGTH_SHORT).show();
+                Log.i("Crear-Panaderia","Success")
+            }.addOnSuccessListener {
+                Log.i("Crear-Panaderia","Failed")
+            }
+
 
             val intentAddSucces = Intent(this, HomePanaderias::class.java)
             startActivity(intentAddSucces)
