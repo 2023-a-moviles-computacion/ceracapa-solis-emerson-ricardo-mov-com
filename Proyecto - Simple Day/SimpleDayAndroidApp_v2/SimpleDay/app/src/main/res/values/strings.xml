@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SimpleDay</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hola blank fragment</string>
+    <string name="enter_your_email">Ingresa tu email .....</string>
+    <string name="enter_your_pass">Ingresa tu contraseña .....</string>
+    <string name="re_enter_your_pass">Reingresa tu contraseña .....</string>
+    <string name="type_your_task">Escribe tu tarea .....</string>
+</resources>

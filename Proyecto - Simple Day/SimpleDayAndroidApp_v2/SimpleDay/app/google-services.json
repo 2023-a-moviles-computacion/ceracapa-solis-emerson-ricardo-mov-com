@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618600938845",
+    "project_id": "simpleday-1f21e",
+    "storage_bucket": "simpleday-1f21e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618600938845:android:ce36807f460e4f204c7cb4",
+        "android_client_info": {
+          "package_name": "com.example.simpleday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZAYahKmUL-UOcmAHB3tveyH1oKcMnjC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
