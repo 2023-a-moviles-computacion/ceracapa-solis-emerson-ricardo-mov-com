@@ -23,7 +23,6 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentSignInBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,7 +44,7 @@ class SignInFragment : Fragment() {
 
                 loginUser(email, pass)
             else
-                Toast.makeText(context, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "¡No se permiten campos vacíos!", Toast.LENGTH_SHORT).show()
         }
     }
 

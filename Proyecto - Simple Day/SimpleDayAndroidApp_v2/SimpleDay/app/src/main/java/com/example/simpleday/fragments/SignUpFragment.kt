@@ -23,7 +23,6 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,10 +48,10 @@ class SignUpFragment : Fragment() {
                     registerUser(email, pass)
 
                 } else {
-                    Toast.makeText(context, "Password is not same", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "La contraseña no es igual", Toast.LENGTH_SHORT).show()
                 }
             } else
-                Toast.makeText(context, "Empty fields are not allowed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "No se permiten campos vacíos", Toast.LENGTH_SHORT).show()
         }
 
     }

@@ -37,7 +37,6 @@ class HomeFragment : Fragment(), ToDoDialogFragment.OnDialogNextBtnClickListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,8 +46,7 @@ class HomeFragment : Fragment(), ToDoDialogFragment.OnDialogNextBtnClickListener
 
         init()
 
-        //get data from firebase
-        getTaskFromFirebase()
+        getTaskFromFirebase() //Extraer la data de firebase
 
 
         binding.addTaskBtn.setOnClickListener {
