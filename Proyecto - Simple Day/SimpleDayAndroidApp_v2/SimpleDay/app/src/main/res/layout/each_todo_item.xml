@@ -19,7 +19,7 @@
             android:fontFamily="@font/inter_extra_bold"
             android:paddingStart="16dp"
             android:text="Item 1"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
