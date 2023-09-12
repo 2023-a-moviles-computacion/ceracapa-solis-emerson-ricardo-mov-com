@@ -116,7 +116,7 @@ class HomeFragment : Fragment(), ToDoDialogFragment.OnDialogNextBtnClickListener
             .push().setValue(todoTask)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(context, "Task Added Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Tarea añadida exitosamente", Toast.LENGTH_SHORT).show()
                     todoEdit.text = null
 
                 } else {
@@ -132,7 +132,7 @@ class HomeFragment : Fragment(), ToDoDialogFragment.OnDialogNextBtnClickListener
         map[toDoData.taskId] = toDoData.task
         database.updateChildren(map).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Tarea actualizada exitosamente", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -143,7 +143,7 @@ class HomeFragment : Fragment(), ToDoDialogFragment.OnDialogNextBtnClickListener
     override fun onDeleteItemClicked(toDoData: ToDoData, position: Int) {
         database.child(toDoData.taskId).removeValue().addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Tarea eliminada exitosamente", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
