@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="400dp"
     android:layout_height="wrap_content"
-    android:background="#494747"
+    android:background="#1E1E1E"
     android:backgroundTint="#1E1E1E"
+    app:cardBackgroundColor="#1E1E1E"
     tools:context=".fragments.ToDoDialogFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#1E1E1E"
+        android:backgroundTint="#1E1E1E">
 
         <ImageView
             android:id="@+id/todoClose"

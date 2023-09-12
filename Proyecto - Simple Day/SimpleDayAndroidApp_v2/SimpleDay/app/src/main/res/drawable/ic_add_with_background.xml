@@ -1,0 +1,12 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo circular blanco -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Tu vector drawable existente -->
+    <item android:drawable="@drawable/ic_baseline_add_" />
+</layer-list>
