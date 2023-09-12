@@ -113,10 +113,10 @@
         android:id="@+id/textview32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="88dp"
         android:fontFamily="@font/inter_regular"
-        android:text="No estas registrado aún??"
+        android:text="¿No estás registrado aún?"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,13 +126,15 @@
         android:id="@+id/textViewSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/inter_regular"
         android:text="Registrate"
-        android:textColor="#FF9800"
+        android:textColor="#00BCD4"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textview32"
         app:layout_constraintStart_toEndOf="@+id/textview32"
-        app:layout_constraintTop_toTopOf="@+id/textview32" />
+        app:layout_constraintTop_toTopOf="@+id/textview32"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
